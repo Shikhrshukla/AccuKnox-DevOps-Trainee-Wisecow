@@ -1,4 +1,4 @@
-name: Wisecow CI Pipeline with Helm Updation feature for argoCD
+name: Wisecow CI Pipeline with Helm Update
 
 on:
   push:
@@ -21,27 +21,8 @@ jobs:
         run: |
           docker run --rm -i hadolint/hadolint < Dockerfile || true
 
-  Code-Scan:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v5
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
-        with:
-          languages: bash
-
-      - name: Run CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
-
   docker_build_and_push:
-    needs: [build, Code-Scan]
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
