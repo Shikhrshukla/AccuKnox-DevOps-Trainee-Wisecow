@@ -16,6 +16,7 @@ service:
   nodePort: 30499
 
 ingress:
+  name: ig-wisecow
   enabled: true
   host: wisecow.local
   secretName: wisecow-tls
