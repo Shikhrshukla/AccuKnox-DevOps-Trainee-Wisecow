@@ -1,4 +1,4 @@
-name: Wisecow CI Pipeline with Helm Update
+name: Wisecow CI Pipeline with Helm Updation
 
 on:
   push:
