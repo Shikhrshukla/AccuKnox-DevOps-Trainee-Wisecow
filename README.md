@@ -107,9 +107,9 @@ You’ll see the latest image deployed after each GitHub Action pipeline run.
 
 ---
 
-### **🐙ArgoCD Integration (UI Method)** 
+### **🐙 ArgoCD Integration (UI Method)** 
 
-After implementing CI/CD with GitHub Actions and Helm, **ArgoCD** was added to enable **Continuous Deployment (GitOps)** — automatically syncing new image updates from the GitHub repo to the Kubernetes cluster. 
+After implementing CI/CD with GitHub Actions and Helm, **ArgoCD** was added to enable **Continuous Deployment (GitOps)** - automatically syncing new image updates from the GitHub repo to the Kubernetes cluster. 
 
 #### 1. **Install ArgoCD on Minikube**
 
@@ -175,7 +175,7 @@ kubectl get ingress -n wisecow
 
 ---
 
-## Scripts — How to run
+## Probelm 2 : Bash Scripts (How to run)
 
 `SystemHealthMonitoring.sh`
 1. Make the script executable: use the command `sudo chmod +x SystemHealthMonitoring.sh` to set execute permission on the file.
@@ -184,6 +184,8 @@ kubectl get ingress -n wisecow
 4. To customize thresholds or behavior, open the script and edit the CPU, memory, and disk threshold variables near the top.
 5. Check the generated log file to review recorded metrics and any alerts.
 
+<img width="1680" height="878" alt="Screenshot from 2025-11-13 16-43-19" src="https://github.com/user-attachments/assets/bb360674-e8cc-4ab2-8028-ee937c1c1914" />
+
 `ApplicationHealthChecker.sh`
 1. Make the script executable: set execute permission on the file using `sudo chmod +x ApplicationHealthChecker.sh`
 2. By default the script checks `https://wisecow.local`
@@ -191,14 +193,25 @@ kubectl get ingress -n wisecow
 4. Stop monitoring with Ctrl+C. To run the script in background, start it with a job control command appropriate for your shell.
 5. Review the log file to see up/down events, response times, and alerts.
 
+<img width="1216" height="955" alt="Screenshot from 2025-11-13 17-18-40" src="https://github.com/user-attachments/assets/2b5cdbec-c33b-4195-b462-59180800be25" />
+
+---
+
+## Probelm 3 : KubeArmor
+
+- Attached the Screenshots in kubearmor directory `./kubearmor/Screenshots/` , go through with it. I'm getting **partial output** from that after setting up Cluster Policies.
+- It also contains kubearmor policy at `./kubearmor/kubearmor-policy.yaml` location.
+
 ---
 
 ## 🧠 Learning Outcomes
-- Hands-on experience with **Docker, Kubernetes, Helm, GitHub Actions, and ArgoCD**
-- Secure app deployment using **TLS certificates**
-- Automated image versioning and Helm chart updates
-- GitOps-based continuous delivery using ArgoCD
-- Modular, reusable infrastructure setup
+- Hands-on experience with **Docker, Kubernetes, Helm, GitHub Actions, and ArgoCD**.
+- Secure app deployment using **TLS certificates**.
+- Automated image versioning and Helm chart updates.
+- GitOps-based continuous delivery using ArgoCD.
+- Modular, reusable infrastructure setup.
+- Gained hands-on experience in system monitoring and application health automation using **Bash Scripting**.
+- Secured Kubernetes workloads with **KubeArmor** policies.
 
 ---
 
