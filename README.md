@@ -106,14 +106,14 @@ You’ll see the latest image deployed after each GitHub Action pipeline run.
 
 ## Scripts — How to run
 
-SystemHealthMonitoring.sh
+`SystemHealthMonitoring.sh`
 1. Make the script executable: use the command `sudo chmod +x SystemHealthMonitoring.sh` to set execute permission on the file.
 2. Run as a normal user to write logs to your home directory; the script writes metrics and alerts to `system_health.log` in your home directory.
 3. To write logs to system log directory (`/var/log`) run the script with elevated privileges (sudo).
 4. To customize thresholds or behavior, open the script and edit the CPU, memory, and disk threshold variables near the top.
 5. Check the generated log file to review recorded metrics and any alerts.
 
-ApplicationHealthChecker.sh
+`ApplicationHealthChecker.sh`
 1. Make the script executable: set execute permission on the file using `sudo chmod +x ApplicationHealthChecker.sh`
 2. By default the script checks `https://wisecow.local`
 3. Run the script; it will periodically check the application endpoint, log status codes and response times, and append results to `application_health.log` in your home directory.
