@@ -199,7 +199,7 @@ kubectl get ingress -n wisecow
 
 ## Probelm 3 : KubeArmor
 
-- Attached the Screenshots in kubearmor directory `./kubearmor/Screenshots/` , go through with it. I'm getting **partial output** from that after setting up Cluster Policies.
+- Attached the **Screenshots** in kubearmor directory `./kubearmor/Screenshots/` , go through with it. I'm getting **partial output** from that after setting up Cluster Policies.
 - It also contains kubearmor policy at `./kubearmor/kubearmor-policy.yaml` location.
 
 ---
