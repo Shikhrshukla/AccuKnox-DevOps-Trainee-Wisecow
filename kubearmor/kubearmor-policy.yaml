@@ -1,0 +1,16 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: block-sensitive-access
+  namespace: wisecow
+spec:
+  selector:
+    matchLabels:
+      app: wisecow
+  severity: 5
+  message: "Access to sensitive system files is blocked!"
+  file:
+    matchPaths:
+      - path: /etc/passwd
+      - path: /etc/shadow
+  action: Block
