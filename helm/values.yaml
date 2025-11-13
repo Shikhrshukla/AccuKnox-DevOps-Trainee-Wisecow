@@ -4,7 +4,7 @@ replicaCount: 2
 
 image:
   repository: shikhrshukla/wisecow
-  tag: latest
+  tag: e4e743c1f4c35dbea0d5a51a1ac8671aa58fcbe6
   pullPolicy: IfNotPresent
 
 container:
