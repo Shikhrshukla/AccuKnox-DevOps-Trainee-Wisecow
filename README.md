@@ -77,6 +77,8 @@ https://wisecow.local
 ```
 
 <img width="1918" height="1001" alt="mainDep" src="https://github.com/user-attachments/assets/c99d33ab-8d40-4289-a125-c47047cd9a54" />
+<img width="903" height="454" alt="Screenshot from 2025-11-13 18-31-40" src="https://github.com/user-attachments/assets/00393d69-f865-4bfe-ad47-eae9ded921b8" />
+
 
 ---
 
@@ -92,6 +94,7 @@ The CI pipeline automates the following stages:
 
 **Secrets Required:**
 | Secret | Description |
+
 |---------|-------------|
 | `DOCKER_USERNAME` | DockerHub username |
 | `DOCKER_PASSWORD` | DockerHub token |
@@ -101,6 +104,74 @@ You’ll see the latest image deployed after each GitHub Action pipeline run.
 
 <img width="1918" height="1001" alt="CI1" src="https://github.com/user-attachments/assets/7dfec06e-7001-41b5-9a06-446bed802544" />
 <img width="1918" height="1001" alt="CI2" src="https://github.com/user-attachments/assets/9ad4190b-668d-4269-b77f-7d0050a90d9f" />
+
+---
+
+### **🐙ArgoCD Integration (UI Method)** 
+
+After implementing CI/CD with GitHub Actions and Helm, **ArgoCD** was added to enable **Continuous Deployment (GitOps)** — automatically syncing new image updates from the GitHub repo to the Kubernetes cluster. 
+
+#### 1. **Install ArgoCD on Minikube**
+
+```bash
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+<img width="1919" height="961" alt="Screenshot from 2025-11-12 19-55-44" src="https://github.com/user-attachments/assets/8add75e8-6e7d-40f9-be1b-e277f3a00ef2" /> 
+
+#### 2. **Expose ArgoCD Server (Local Access)**
+
+```bash
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+```
+<img width="1919" height="961" alt="Screenshot from 2025-11-12 19-56-20" src="https://github.com/user-attachments/assets/5167fd95-4026-4991-86f2-4d69cec9d3bb" /> Then access the ArgoCD UI at: 👉 [https://localhost:8080](https://localhost:8080) 
+
+#### 3. **Extract Admin Password** Get the default admin password:
+
+```bash
+kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 --decode
+```
+
+#### 4. **Login to ArgoCD UI**
+
+- **Username:** admin
+- **Password:** (value from above command)
+
+After login, change the password for security. 
+
+<img width="1919" height="961" alt="Screenshot from 2025-11-12 19-58-04" src="https://github.com/user-attachments/assets/fa1f8a5b-2240-4c08-863e-dcee0f404864" /> 
+
+#### 5. **Connect Wisecow GitHub Repository** 
+
+In the ArgoCD dashboard: 
+1. Go to **Settings → Repositories → Connect Repo using HTTPS**
+2. Add your GitHub repo: `https://github.com/Shikhrshukla/AccuKnox-DevOps-Trainee-Wisecow.git`
+3. Authentication Type: **HTTPS with Personal Access Token**
+
+#### 6. **Create Application Manually via UI** 
+
+- Go to **Applications → New App**
+- Fill in the details:
+  - **App Name:** wisecowapp
+  - **Project:** default
+  - **Repository URL:** your GitHub repo
+  - **Revision:** main - **Path:** helm
+  - **Cluster:** https://kubernetes.default.svc
+  - **Namespace:** wisecow
+- Click **Create** and **Sync**
+
+ArgoCD will: 
+- Automatically pull Helm changes (like updated image tags)
+- Deploy the latest version of Wisecow to Kubernetes
+
+<img width="1919" height="961" alt="Screenshot from 2025-11-12 20-00-36" src="https://github.com/user-attachments/assets/af69c908-2410-43dc-b091-b2b618e5c07e" />
+
+#### 7. **Verify Deployment**
+
+```bash
+kubectl get pods -n wisecow
+kubectl get ingress -n wisecow
+```
 
 ---
 
